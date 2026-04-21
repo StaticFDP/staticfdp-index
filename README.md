@@ -1,6 +1,7 @@
 # staticfdp-index
 
-A **Static FDP Index** — the second layer of the [StaticFDP ecosystem](https://github.com/StaticFDP/staticfdp).
+A **Static FDP Index** — the second layer of the StaticFDP ecosystem
+([GitHub](https://github.com/StaticFDP/staticfdp) · [Codeberg](https://codeberg.org/StaticFDP/staticfdp)).
 
 An FDP Index is a registry of FAIR Data Points. FDPs register by opening a
 GitHub Issue or submitting a YAML pull request. A CI pipeline periodically
@@ -12,15 +13,11 @@ No dedicated server required.
 
 ## Part of the StaticFDP Ecosystem
 
-| Repository | Layer |
-|---|---|
-| [staticfdp](https://github.com/StaticFDP/staticfdp) | FAIR Data Point |
-| **staticfdp-index** ← you are here | FDP Index |
-| [staticfdp-vp](https://github.com/StaticFDP/staticfdp-vp) | Virtual Platform |
-
-Both GitHub and Codeberg deployments are maintained:
-- GitHub: [github.com/StaticFDP/staticfdp-index](https://github.com/StaticFDP/staticfdp-index)
-- Codeberg: [codeberg.org/StaticFDP/staticfdp-index](https://codeberg.org/StaticFDP/staticfdp-index)
+| Repository | GitHub | Codeberg | Layer |
+|---|---|---|---|
+| staticfdp | [github.com/StaticFDP/staticfdp](https://github.com/StaticFDP/staticfdp) | [codeberg.org/StaticFDP/staticfdp](https://codeberg.org/StaticFDP/staticfdp) | FAIR Data Point |
+| **staticfdp-index** ← you are here | [github.com/StaticFDP/staticfdp-index](https://github.com/StaticFDP/staticfdp-index) | [codeberg.org/StaticFDP/staticfdp-index](https://codeberg.org/StaticFDP/staticfdp-index) | FDP Index |
+| staticfdp-vp | [github.com/StaticFDP/staticfdp-vp](https://github.com/StaticFDP/staticfdp-vp) | [codeberg.org/StaticFDP/staticfdp-vp](https://codeberg.org/StaticFDP/staticfdp-vp) | Virtual Platform |
 
 ---
 
@@ -54,10 +51,18 @@ FDP operator opens Issue
 
 ## Quick start
 
+**GitHub:**
 ```bash
 git clone https://github.com/StaticFDP/staticfdp-index
 cd staticfdp-index
 bash scripts/setup.sh          # configure GitHub / Codeberg / both
+```
+
+**Codeberg:**
+```bash
+git clone https://codeberg.org/StaticFDP/staticfdp-index
+cd staticfdp-index
+bash scripts/setup.sh
 ```
 
 Then:
