@@ -1,0 +1,34 @@
+# FDP Index Configuration
+# ========================
+# Run  scripts/setup.sh  to fill this in interactively,
+# or edit directly and commit.
+
+fdp_index:
+  title: "My FDP Index"
+  # Canonical public URL for this index (used in all RDF metadata)
+  base_url: https://OWNER.github.io/staticfdp-index
+  license: https://creativecommons.org/licenses/by/4.0/
+  publisher_name: "My Organisation"
+  publisher_url: https://example.org/
+
+infrastructure:
+  primary: github          # github | codeberg | both
+
+  github:
+    enabled: true
+    repo: OWNER/staticfdp-index
+    pages_url: https://OWNER.github.io/staticfdp-index
+
+  codeberg:
+    enabled: false
+    repo: OWNER/staticfdp-index
+    base_url: https://codeberg.org
+    pages_url: https://OWNER.codeberg.page/staticfdp-index
+
+harvest:
+  # How often to re-harvest all registered FDPs (cron, UTC)
+  schedule: "25 4 * * *"
+  # Timeout per FDP fetch in seconds
+  timeout_seconds: 30
+  # If true, skip FDPs that return non-200 status (don't remove them from registry)
+  soft_fail: true

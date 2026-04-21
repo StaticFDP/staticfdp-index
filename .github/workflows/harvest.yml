@@ -1,0 +1,53 @@
+name: Harvest FDPs
+
+on:
+  issues:
+    types: [opened, edited, labeled]
+  schedule:
+    - cron: "25 4 * * *"    # daily 04:25 UTC
+  workflow_dispatch:
+    inputs:
+      infrastructure:
+        description: "Override infrastructure target (github | codeberg | both | leave blank for config)"
+        required: false
+        default: ""
+
+jobs:
+  harvest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install rdflib requests
+
+      - name: Harvest registered FDPs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INFRASTRUCTURE_OVERRIDE: ${{ github.event.inputs.infrastructure }}
+        run: python3 scripts/harvest_fdps.py
+
+      - name: Commit generated index
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/fdp-index/ docs/index.html
+          git diff --staged --quiet && echo "No changes." || \
+            git commit -m "data: update FDP index [skip ci]"
+          git push origin main
+
+      - name: Summary
+        run: |
+          COUNT=$(grep -c 'dcat:Dataset' docs/fdp-index/index.ttl 2>/dev/null || echo 0)
+          echo "### FDP Index updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**${COUNT} FDPs** in index — [view](https://$(cat docs/CNAME 2>/dev/null || echo OWNER.github.io/staticfdp-index))" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,23 @@
+when:
+  - event: cron
+  - event: manual
+
+steps:
+  - name: harvest
+    image: python:3.12-slim
+    environment:
+      FORGEJO_TOKEN:
+        from_secret: FORGEJO_TOKEN
+    commands:
+      - pip install rdflib requests --quiet
+      - python3 scripts/harvest_fdps.py
+
+  - name: commit
+    image: alpine/git
+    commands:
+      - git config user.name  "woodpecker-ci[bot]"
+      - git config user.email "ci@codeberg.org"
+      - git add docs/fdp-index/ docs/index.html
+      - git diff --staged --quiet && echo "No changes." ||
+          git commit -m "data: update FDP index [skip ci]"
+      - git push origin HEAD:main

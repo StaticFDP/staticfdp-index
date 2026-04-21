@@ -1,0 +1,9 @@
+# Example registered FDP entry
+# Rename this file (e.g. ga4gh-rare-disease.yaml) and fill in the fields below.
+# The harvest pipeline reads all *.yaml files in this directory.
+
+title: "Example FAIR Data Point"
+catalog_url: "https://example.org/fdp/catalog.ttl"
+landing_page: "https://example.org/fdp/"
+description: "An example FDP registration. Replace with a real FDP."
+contact: "maintainer@example.org"

@@ -1,0 +1,48 @@
+name: Register FDP
+description: Register a FAIR Data Point with this index
+title: "[REGISTER] "
+labels: ["fdp-registration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in the details below to register your FAIR Data Point.
+        The harvest pipeline will pick it up on its next run (daily, or trigger manually).
+
+  - type: input
+    id: title
+    attributes:
+      label: FDP title
+      description: Human-readable name for your FAIR Data Point
+      placeholder: "My Project FAIR Data Point"
+    validations:
+      required: true
+
+  - type: input
+    id: catalog_url
+    attributes:
+      label: Catalog URL
+      description: Direct URL to your FDP's catalog.ttl (must return valid Turtle with dcat:Catalog)
+      placeholder: "https://owner.github.io/repo/fdp/catalog.ttl"
+    validations:
+      required: true
+
+  - type: input
+    id: landing_page
+    attributes:
+      label: Landing page URL
+      description: Human-readable landing page for your FDP (optional)
+      placeholder: "https://owner.github.io/repo/"
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short description
+      description: One or two sentences describing the FDP's content
+      placeholder: "Datasets collected during the XYZ project, published as DCAT-conformant RDF."
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact / maintainer
+      description: Name or ORCID of the FDP maintainer
