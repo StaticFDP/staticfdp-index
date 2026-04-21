@@ -31,20 +31,20 @@ No dedicated server required.
    and `docs/fdp-index/index.jsonld`, then commits and pushes; GitHub / Codeberg Pages
    serves the result immediately
 
-```
-FDP operator opens Issue
-        │
-        ▼
-  ┌────────────────────┐
-  │  registered-fdps/  │  ← YAML registry of FDP catalog URLs
-  └────────┬───────────┘
-           │  harvest (scheduled CI)
-           ▼
-  scripts/harvest_fdps.py
-           │
-           ├──► docs/fdp-index/index.ttl
-           ├──► docs/fdp-index/index.jsonld
-           └──► docs/index.html  (human-readable discovery page)
+```mermaid
+flowchart TD
+    OP(["👤 FDP operator opens Issue"])
+    REG["registered-fdps/*.yaml\nYAML registry of FDP catalog URLs"]
+    PY["scripts/harvest_fdps.py\nscheduled CI pipeline"]
+    TTL["docs/fdp-index/index.ttl"]
+    JSONLD["docs/fdp-index/index.jsonld"]
+    HTML["docs/index.html\nhuman-readable discovery page"]
+
+    OP --> REG
+    REG -->|"harvest"| PY
+    PY --> TTL
+    PY --> JSONLD
+    PY --> HTML
 ```
 
 ---
