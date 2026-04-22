@@ -44,5 +44,17 @@ body:
   - type: input
     id: contact
     attributes:
-      label: Contact / maintainer
-      description: Name or ORCID of the FDP maintainer
+      label: Contact email
+      description: Email address for the FDP maintainer
+      placeholder: "data-access@example.org"
+    validations:
+      required: true
+
+  - type: input
+    id: submitted_by
+    attributes:
+      label: ORCID iD
+      description: Your ORCID identifier — will be recorded as dcterms:creator for this registration
+      placeholder: "0000-0001-9773-4008"
+    validations:
+      required: true
