@@ -106,6 +106,24 @@
     .ror-x:hover{color:#ef4444}
   </style>
 </head>
+<script id="branding" type="application/json">
+{
+  "title":        "Register your FAIR Data Point",
+  "subtitle":     "Add your FDP to this index so others can discover your datasets.",
+  "logo_url":     "",
+  "logo_alt":     "Logo",
+  "header_bg":    "linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#0891b2 100%)",
+  "accent_color": "#2563eb",
+  "footer_text":  "StaticFDP Ecosystem",
+  "footer_links": [
+    { "label": "GitHub",   "url": "https://github.com/StaticFDP/staticfdp-index" },
+    { "label": "Codeberg", "url": "https://codeberg.org/StaticFDP/staticfdp-index" }
+  ],
+  "worker_url":  "",
+  "custom_css":  ""
+}
+</script>
+
 <body>
 
 <header>
@@ -487,8 +505,73 @@ async function submitForm(e) {
   }
 }
 
+// ── Apply branding ────────────────────────────────────────────────────────────
+(function applyBranding() {
+  let B = {};
+  try { B = JSON.parse(document.getElementById('branding')?.textContent || '{}'); } catch {}
+
+  const set = (sel, prop, val) => { const el = document.querySelector(sel); if (el && val) el[prop] = val; };
+
+  // Title / subtitle
+  set('header h1', 'textContent', B.title);
+  set('header p',  'textContent', B.subtitle);
+  if (B.title) document.title = B.title;
+
+  // Logo
+  if (B.logo_url) {
+    const img = document.createElement('img');
+    img.src = B.logo_url; img.alt = B.logo_alt || 'Logo';
+    img.style.cssText = 'height:36px;width:auto;margin-bottom:8px;border-radius:4px;display:block;margin-left:auto;margin-right:auto';
+    const hdr = document.querySelector('header');
+    if (hdr) hdr.insertBefore(img, hdr.firstChild);
+  }
+
+  // Header background
+  const header = document.querySelector('header');
+  if (header && B.header_bg) header.style.background = B.header_bg;
+
+  // Footer
+  const ft = document.getElementById('footer-text');
+  if (ft && B.footer_text) ft.textContent = B.footer_text;
+  const fl = document.getElementById('footer-links');
+  if (fl && B.footer_links?.length) {
+    fl.innerHTML = B.footer_links.map(l =>
+      `<a href="${l.url}" target="_blank" style="color:rgba(255,255,255,.6);margin-left:12px">${l.label}</a>`
+    ).join('');
+  }
+
+  // Worker URL — prepend to all fetch paths
+  if (B.worker_url) {
+    window.__workerBase = B.worker_url.replace(/\/$/, '');
+  }
+
+  // Custom CSS
+  if (B.custom_css) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet'; link.href = B.custom_css;
+    document.head.appendChild(link);
+  }
+})();
+
+// ── Patch fetch paths to use worker_url if set ────────────────────────────────
+const _origFetch = window.fetch;
+window.fetch = function(url, opts) {
+  if (typeof url === 'string' && url.startsWith('/') && window.__workerBase) {
+    url = window.__workerBase + url;
+  }
+  return _origFetch.call(this, url, opts);
+};
+
 // Initial preview
 preview();
 </script>
+
+<footer id="site-footer" style="background:#1a1a2e;color:rgba(255,255,255,.5);padding:14px 24px;font-size:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+  <span id="footer-text">StaticFDP Ecosystem</span>
+  <span id="footer-links">
+    <a href="https://github.com/StaticFDP/staticfdp-index" target="_blank" style="color:rgba(255,255,255,.6);margin-left:12px">GitHub</a>
+    <a href="https://codeberg.org/StaticFDP/staticfdp-index" target="_blank" style="color:rgba(255,255,255,.6);margin-left:12px">Codeberg</a>
+  </span>
+</footer>
 </body>
 </html>
