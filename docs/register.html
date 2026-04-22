@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register your FDP — StaticFDP Index</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.6;color:#1a1a2e;background:#f0f9ff}
+    a{color:#2563eb}
+
+    /* ── Header ── */
+    header{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#0891b2 100%);color:#fff;padding:36px 24px 28px;text-align:center}
+    header h1{font-size:clamp(22px,4vw,34px);font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+    header p{font-size:clamp(13px,2vw,16px);opacity:.85;max-width:540px;margin:0 auto}
+    .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:2px 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+
+    /* ── Layout ── */
+    .page{max-width:960px;margin:0 auto;padding:32px 16px}
+    .two-col{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+    @media(max-width:700px){.two-col{grid-template-columns:1fr}}
+
+    /* ── Card ── */
+    .card{background:#fff;border:1px solid #dbeafe;border-radius:12px;padding:28px 28px 24px}
+    .card h2{font-size:17px;font-weight:700;color:#1e3a8a;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #dbeafe}
+
+    /* ── Form ── */
+    .field{margin-bottom:18px}
+    label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:5px}
+    label .req{color:#ef4444}
+    input,textarea,select{width:100%;padding:9px 12px;border:1px solid #d1d5db;border-radius:7px;font-size:14px;color:#1a1a2e;background:#fff;transition:border .15s}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+    textarea{resize:vertical;min-height:90px}
+    .hint{font-size:12px;color:#9ca3af;margin-top:4px}
+
+    /* ── Checkbox grid ── */
+    .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+    @media(max-width:480px){.check-grid{grid-template-columns:1fr}}
+    .check-item{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border:1px solid #e5e7eb;border-radius:6px;cursor:pointer}
+    .check-item:hover{background:#eff6ff;border-color:#bfdbfe}
+    .check-item input[type=checkbox]{width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:#2563eb}
+    .check-item .cl{font-size:12px;line-height:1.4}
+    .check-item .cl strong{display:block;font-size:12px;color:#1e3a8a}
+
+    /* ── Submit button ── */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s;text-decoration:none}
+    .btn-primary{background:#2563eb;color:#fff}
+    .btn-primary:hover:not(:disabled){background:#1d4ed8;transform:translateY(-1px)}
+    .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .btn-gh{background:#24292f;color:#fff}
+    .btn-gh:hover{background:#000}
+    .btn-cb{background:#2185d0;color:#fff}
+    .btn-cb:hover{background:#1678c2}
+
+    /* ── Preview pane ── */
+    .preview-card{background:#1e293b;border-radius:12px;overflow:hidden;position:sticky;top:20px}
+    .preview-head{background:#0f172a;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+    .preview-head span{color:#94a3b8;font-size:12px;font-family:monospace}
+    .preview-head .dot{width:10px;height:10px;border-radius:50%}
+    .dots{display:flex;gap:5px}
+    .preview-body{padding:16px;font-family:monospace;font-size:12px;color:#e2e8f0;white-space:pre-wrap;line-height:1.6;max-height:520px;overflow-y:auto;min-height:180px}
+    .preview-body .key{color:#7dd3fc}
+    .preview-body .val{color:#a3e635}
+
+    /* ── Auth banner ── */
+    .auth-banner{border:1px solid #dbeafe;border-radius:9px;padding:14px 16px;margin-bottom:22px;display:flex;align-items:center;gap:12px;font-size:13px;background:#eff6ff}
+    .auth-banner.ok{background:#f0fdf4;border-color:#bbf7d0}
+    .auth-banner.ok .icon{color:#16a34a}
+    .auth-banner .icon{font-size:20px;flex-shrink:0}
+    .auth-banner .login-link{margin-left:auto;font-size:12px;font-weight:600;color:#2563eb;white-space:nowrap}
+
+    /* ── Success ── */
+    #success{display:none;text-align:center;padding:40px 20px}
+    #success .icon{font-size:48px;margin-bottom:12px}
+    #success h2{font-size:22px;font-weight:800;color:#1e3a8a;margin-bottom:8px}
+    #success p{color:#6b7280;max-width:400px;margin:0 auto 20px}
+
+    /* ── Alt: direct buttons ── */
+    .alt-section{margin-top:20px;padding:16px;background:#f8fafc;border-radius:8px;border:1px solid #e5e7eb}
+    .alt-section p{font-size:13px;color:#6b7280;margin-bottom:10px}
+    .alt-buttons{display:flex;gap:8px;flex-wrap:wrap}
+
+    /* ── Steps aside ── */
+    .steps-list{list-style:none;padding:0}
+    .steps-list li{display:flex;gap:10px;margin-bottom:12px;font-size:13px;color:#374151}
+    .steps-list li .num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#2563eb;color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+    code{font-family:monospace;font-size:12px;background:#f1f5f9;padding:2px 6px;border-radius:4px;color:#1e3a8a}
+    .info-links a{display:block;font-size:13px;color:#2563eb;margin-bottom:6px}
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">FDP Index</div>
+  <h1>Register your FAIR Data Point</h1>
+  <p>Add your FDP to this index so others can discover your datasets.</p>
+</header>
+
+<div class="page">
+  <div class="two-col">
+
+    <!-- ── Left: form ── -->
+    <div>
+      <!-- Auth banner -->
+      <div class="auth-banner" id="auth-banner">
+        <span class="icon">🔑</span>
+        <div>
+          <strong>Sign in with ORCID</strong> to identify yourself as the FDP maintainer.
+          Your ORCID iD will be recorded as the contact for this registration.
+        </div>
+        <a class="login-link" href="/api/login" id="login-link">Sign in →</a>
+      </div>
+
+      <div class="card">
+        <h2>FDP Registration Form</h2>
+        <form id="reg-form" onsubmit="submitForm(event)">
+
+          <div class="field">
+            <label for="fdp-title">FDP name <span class="req">*</span></label>
+            <input type="text" id="fdp-title" required placeholder="e.g. NEMO Neuromuscular Disease Registry FDP" oninput="preview()">
+            <div class="hint">Short name for this FAIR Data Point</div>
+          </div>
+
+          <div class="field">
+            <label for="catalog-url">Catalog URL <span class="req">*</span></label>
+            <input type="url" id="catalog-url" required placeholder="https://data.example.org/catalog.ttl" oninput="preview()">
+            <div class="hint">URL resolving to a valid Turtle or JSON-LD DCAT Catalog. This is what the index harvests.</div>
+          </div>
+
+          <div class="field">
+            <label for="landing-page">FDP landing page</label>
+            <input type="url" id="landing-page" placeholder="https://data.example.org/" oninput="preview()">
+            <div class="hint">Human-readable page for your FDP (defaults to the catalog URL root if blank)</div>
+          </div>
+
+          <div class="field">
+            <label for="description">Description <span class="req">*</span></label>
+            <textarea id="description" required placeholder="Briefly describe what data this FDP makes discoverable, who maintains it, and which community it serves." oninput="preview()"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="publisher">Publisher / Organisation <span class="req">*</span></label>
+            <input type="text" id="publisher" required placeholder="e.g. Amsterdam UMC — Department of Bioinformatics" oninput="preview()">
+          </div>
+
+          <div class="field">
+            <label for="publisher-url">Publisher URL</label>
+            <input type="url" id="publisher-url" placeholder="https://www.amsterdamumc.org/" oninput="preview()">
+          </div>
+
+          <div class="field">
+            <label>Data themes <span class="req">*</span></label>
+            <div class="check-grid">
+              <label class="check-item"><input type="checkbox" value="http://www.orpha.net/ontology/orphanet.owl" onchange="preview()"><span class="cl"><strong>ORDO</strong>Rare disease ontology</span></label>
+              <label class="check-item"><input type="checkbox" value="http://purl.obolibrary.org/obo/hp.owl" onchange="preview()"><span class="cl"><strong>HPO</strong>Human phenotypes</span></label>
+              <label class="check-item"><input type="checkbox" value="http://purl.obolibrary.org/obo/mondo.owl" onchange="preview()"><span class="cl"><strong>MONDO</strong>Disease ontology</span></label>
+              <label class="check-item"><input type="checkbox" value="https://id.nlm.nih.gov/mesh/" onchange="preview()"><span class="cl"><strong>MeSH</strong>Medical subjects</span></label>
+              <label class="check-item"><input type="checkbox" value="http://www.ebi.ac.uk/efo/efo.owl" onchange="preview()"><span class="cl"><strong>EFO</strong>Experimental factors</span></label>
+              <label class="check-item"><input type="checkbox" value="http://purl.obolibrary.org/obo/chebi.owl" onchange="preview()"><span class="cl"><strong>ChEBI</strong>Chemical entities</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="contact">Contact email <span class="req">*</span></label>
+            <input type="email" id="contact" required placeholder="data-access@example.org" oninput="preview()">
+          </div>
+
+          <div class="field">
+            <label for="orcid">Your ORCID iD <span class="req">*</span></label>
+            <input type="text" id="orcid" required placeholder="0000-0001-9773-4008" oninput="preview()" pattern="\d{4}-\d{4}-\d{4}-\d{3}[\dX]">
+            <div class="hint">Format: 0000-0000-0000-0000</div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submit-btn">
+            <span>📥</span> Submit registration
+          </button>
+
+        </form>
+
+        <!-- Alternative: open GitHub/Codeberg issue directly -->
+        <div class="alt-section" id="alt-buttons">
+          <p>Or open a registration issue directly on your preferred platform:</p>
+          <div class="alt-buttons">
+            <a id="gh-link" href="#" class="btn btn-gh" target="_blank">🐙 Open GitHub Issue</a>
+            <a id="cb-link" href="#" class="btn btn-cb" target="_blank">⛵ Open Codeberg Issue</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div id="success">
+        <div class="icon">🎉</div>
+        <h2>Registration submitted!</h2>
+        <p>Your FDP registration has been received. The harvest pipeline runs daily and will include your FDP in the next cycle.</p>
+        <a href="index.html" class="btn btn-primary" style="margin:0 auto;display:inline-flex">← Back to index</a>
+      </div>
+    </div>
+
+    <!-- ── Right: preview + info ── -->
+    <div>
+      <div class="preview-card" style="margin-bottom:16px">
+        <div class="preview-head">
+          <div class="dots">
+            <div class="dot" style="background:#ef4444"></div>
+            <div class="dot" style="background:#f59e0b"></div>
+            <div class="dot" style="background:#22c55e"></div>
+          </div>
+          <span>Issue preview</span>
+          <span style="font-size:10px;color:#475569">[FDP-REGISTRATION]</span>
+        </div>
+        <div class="preview-body" id="preview-body">Fill in the form to see<br>the issue that will be created.</div>
+      </div>
+
+      <div class="card">
+        <h2>How registration works</h2>
+        <ol class="steps-list">
+          <li><span class="num">1</span><span>Your registration is submitted as a GitHub / Codeberg Issue with label <code>fdp-registration</code>.</span></li>
+          <li><span class="num">2</span><span>A maintainer reviews it (or it's auto-approved if the catalog URL validates).</span></li>
+          <li><span class="num">3</span><span>A YAML file is added to <code>registered-fdps/</code> and the pipeline runs.</span></li>
+          <li><span class="num">4</span><span>Your FDP appears in <code>index.ttl</code> and the browse UI within 24 h.</span></li>
+        </ol>
+
+        <div class="info-links" style="margin-top:16px">
+          <strong style="font-size:12px;color:#6b7280;display:block;margin-bottom:6px">REQUIREMENTS</strong>
+          <a href="https://specs.fairdatapoint.org/" target="_blank">FDP specification ↗</a>
+          <a href="https://www.w3.org/TR/vocab-dcat-3/" target="_blank">DCAT 3 specification ↗</a>
+          <a href="https://github.com/StaticFDP/staticfdp-index" target="_blank">Index source code ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── ORCID init ────────────────────────────────────────────────────────────────
+(function initOrcid() {
+  const m = document.cookie.match(/orcid_id=([^;]+)/);
+  if (m) {
+    const id = decodeURIComponent(m[1]);
+    const el = document.getElementById('orcid');
+    if (el) { el.value = id; el.readOnly = true; }
+    const banner = document.getElementById('auth-banner');
+    if (banner) {
+      banner.innerHTML = `<span class="icon">✅</span><div>Signed in as ORCID <strong>${id}</strong></div>`;
+      banner.classList.add('ok');
+    }
+    preview();
+  }
+})();
+
+// ── Preview ───────────────────────────────────────────────────────────────────
+function preview() {
+  const title   = val('fdp-title')       || '_FDP name_';
+  const catUrl  = val('catalog-url')     || '_catalog URL_';
+  const land    = val('landing-page')    || catUrl.replace(/\/[^/]+$/, '/');
+  const desc    = val('description')     || '_description_';
+  const pub     = val('publisher')       || '_publisher_';
+  const pubUrl  = val('publisher-url')   || '';
+  const contact = val('contact')         || '_contact_';
+  const orcid   = val('orcid')           || '_orcid_';
+
+  const themes  = [...document.querySelectorAll('.check-grid input:checked')].map(c => `\n  - ${c.value}`).join('');
+
+  const body = [
+    `## [FDP-REGISTRATION] ${title}`,
+    ``,
+    `**type:** fdp-registration`,
+    `**title:** ${title}`,
+    `**catalog_url:** ${catUrl}`,
+    `**landing_page:** ${land}`,
+    `**description:** ${desc}`,
+    `**publisher:** ${pub}`,
+    pubUrl ? `**publisher_url:** ${pubUrl}` : null,
+    themes ? `**themes:**${themes}` : null,
+    `**contact:** ${contact}`,
+    `**submitted_by:** ${orcid}`,
+  ].filter(Boolean).join('\n');
+
+  const el = document.getElementById('preview-body');
+  el.textContent = body;
+
+  // Update direct links
+  const ghBase = 'https://github.com/StaticFDP/staticfdp-index/issues/new';
+  const cbBase = 'https://codeberg.org/StaticFDP/staticfdp-index/issues/new';
+  const issueTitle = encodeURIComponent(`[FDP-REGISTRATION] ${title === '_FDP name_' ? '' : title}`);
+  const issueBody  = encodeURIComponent(body);
+  document.getElementById('gh-link').href = `${ghBase}?title=${issueTitle}&body=${issueBody}&labels=fdp-registration`;
+  document.getElementById('cb-link').href = `${cbBase}?title=${issueTitle}&body=${issueBody}`;
+}
+
+function val(id) { return (document.getElementById(id)?.value || '').trim(); }
+
+// ── Submit ────────────────────────────────────────────────────────────────────
+async function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+
+  const title  = `[FDP-REGISTRATION] ${val('fdp-title')}`;
+  const themes = [...document.querySelectorAll('.check-grid input:checked')].map(c => `\n  - ${c.value}`).join('');
+  const pubUrl = val('publisher-url');
+
+  const body = [
+    `**type:** fdp-registration`,
+    `**title:** ${val('fdp-title')}`,
+    `**catalog_url:** ${val('catalog-url')}`,
+    `**landing_page:** ${val('landing-page') || val('catalog-url').replace(/\/[^/]+$/, '/')}`,
+    `**description:** ${val('description')}`,
+    `**publisher:** ${val('publisher')}`,
+    pubUrl ? `**publisher_url:** ${pubUrl}` : null,
+    themes ? `**themes:**${themes}` : null,
+    `**contact:** ${val('contact')}`,
+    `**submitted_by:** ${val('orcid')}`,
+  ].filter(Boolean).join('\n');
+
+  try {
+    const resp = await fetch('/api/submit', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ type: 'fdp-registration', title, body }),
+    });
+    if (!resp.ok) throw new Error(await resp.text());
+    document.getElementById('reg-form').style.display = 'none';
+    document.getElementById('alt-buttons').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+  } catch(err) {
+    alert('Submission failed: ' + err.message + '\n\nUse the GitHub / Codeberg buttons below instead.');
+    btn.disabled = false; btn.innerHTML = '<span>📥</span> Submit registration';
+  }
+}
+
+// Initial preview
+preview();
+</script>
+</body>
+</html>
