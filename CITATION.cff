@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: StaticFDP Index — Static FDP Index
+abstract: >
+  A static-hosting implementation of the FDP Index layer of the FAIR Data Point
+  ecosystem. Harvests registered FDPs, validates DCAT catalogs, and serves a
+  machine-readable discovery index as static RDF via GitHub Pages or Codeberg Pages.
+license: MIT
+repository-code: https://github.com/StaticFDP/staticfdp-index
+url: https://codeberg.org/StaticFDP/staticfdp-index
+date-released: "2026-04-16"
+version: "0.1.0"
+keywords:
+  - FAIR Data Point
+  - FDP Index
+  - FAIR data
+  - linked data
+  - DCAT
+  - static site
+authors:
+  - given-names: Rajaram
+    family-names: Kaliyaperumal
+    orcid: https://orcid.org/0000-0002-1215-167X
+  - given-names: Eric G.
+    family-names: "Prud'hommeaux"
+    orcid: https://orcid.org/0000-0003-1775-9921
+  - given-names: Egon
+    family-names: Willighagen
+    orcid: https://orcid.org/0000-0001-7542-0286
+  - given-names: Andra
+    family-names: Waagmeester
+    orcid: https://orcid.org/0000-0001-9773-4008
