@@ -1,5 +1,8 @@
 # staticfdp-index
 
+> [!IMPORTANT]
+> **The StaticFDP index is [fdp-index](https://github.com/StaticFDP/fdp-index)**, live at [fdp.semscape.org/fdp-index](https://fdp.semscape.org/fdp-index/) and crawled every day. In the [StaticFDP consolidation](https://github.com/StaticFDP/.github/blob/main/profile/README.md#which-repository-does-what) (one repository per layer), this repository's registration form (ROR lookup, ORCID) moves there ([fdp-index#1](https://github.com/StaticFDP/fdp-index/pull/1)). Once that has landed, this repository is proposed for archiving; it stays readable. The Codeberg mirror follows the same plan.
+
 A **Static FDP Index** — the second layer of the StaticFDP ecosystem
 ([GitHub](https://github.com/StaticFDP/staticfdp) · [Codeberg](https://codeberg.org/StaticFDP/staticfdp)).
 
